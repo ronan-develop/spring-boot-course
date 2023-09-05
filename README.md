@@ -10,6 +10,8 @@
 - [Spring Boot starters](#spring-boot-starters)
 - [Dev Tools](#dev-tools)
 - [Actuator](#actuator)
+- [run from CLI](#run-from-the-command-line)
+- [Custom application properties](#custom-application-properties)
 
 - [Lexicon](#lexicon)
 
@@ -121,6 +123,7 @@ mvn clean compile test
   Main Spring Boot aplication class, created by initializr and your controllers
 
 - `resources/applications.properties` to add custom properties or config.
+  
   ```aplication.properties
   # configure my props
   coach.name=Mickey Mouse
@@ -239,6 +242,33 @@ management.endpoints.web.exposure.exclude=health,info
 </dependency>
 <!-- password is in console -->
 ```
+
+## Run from the command line
+
+Option 1 : Use `java -jar my-app.jar`
+
+Option 2 : Use Spring Boot Maven plugin
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-maven-plugin</artifactId>
+</dependency>
+```
+
+## Spring Core
+
+### Inversion of Control
+
+Outsourcing construction and management of object. The Spring Container works like a Factory. The clients
+delegates to another object the responsibility of a providing its dependencies.
+
+**🛈Autowiring** <ins>implements</ins> `Dependency injection`.
+
+- Create & manages objects (inversion of control)
+- Inject object dependencies (Dependencies Injection)
+
+
 
 ## Lexicon
 
