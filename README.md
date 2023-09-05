@@ -5,6 +5,8 @@
 - [Quick start](#start-a-project)
 - [REST controller](#create-a-rest-controller)
 - [Overview](#overview)
+- [Maven](#maven)
+  - [pom](#pom.xml)
 
 - [Lexicon](#lexicon)
 
@@ -37,8 +39,53 @@ public class SimpleRestController {
 The Core Container is a factory for creating beans & manages bean dependencies. Core and beans are responsible for
 providing the fundamentals of the framework and dependency injection.
 
+## Maven
+
+<ins>Builds your Java project and manages dependencies</ins>.
+
+Maven handle class / build path for you.
+
+Standard directory structure :
+```txt
+🞃 my-cool-app
+  pom.xml
+  🞃 src
+    🞃 main
+      🞂 java
+      🞂 resources
+      🞂 webapp
+    🞃 test
+      🞂 java
+      🞂 resources
+  🞂 target
+```
+|Directory|Description|
+|:---:|:---:|
+|src/main/java|Your Java source code|
+|src/main/resources|Properties/config files used by your app|
+|src/main/webapp|JSP files & web config or assets (images, css, js etc.)|
+|src/test|Unit testing code and properties|
+|target|Destination directory for compiled code|
+
+### pom.xml
+
+- Project meta data
+  
+Project name, version, output files type: JAR,WAR etc.
+  
+-  dependencies
+
+List of projects we depend on, Spring, Hibernate, etc.
+
+- plug ins
+
+Additional custom tasks to run → generate JUnit test reports etc.
+
+
+
 ## Lexicon
 
+- HATEOAS :  Hypermedia as the Engine of Application State
 - Beans : Generic Objects
 - POJO : Plain Old Java Object
 - AOP : Apect Oriented Programing
@@ -52,3 +99,5 @@ providing the fundamentals of the framework and dependency injection.
     - Servlet, WebSocket, Web
 - Test Layer :
     - Unit, Integration, Mock
+- pom file → Project Object Model file
+- GAV : Group ID, Artifact Id, Version
