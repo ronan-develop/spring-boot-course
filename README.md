@@ -9,6 +9,7 @@
   - [pom](#pom.xml)
 - [Spring Boot starters](#spring-boot-starters)
 - [Dev Tools](#dev-tools)
+- [Actuator](#actuator)
 
 - [Lexicon](#lexicon)
 
@@ -174,6 +175,42 @@ Benefits of the Spring boot Starter Parent :
 ## Dev Tools
 
 Plug-in autmatically restarts your application when code is updated, simply add dependenciy to the POM file.
+
+## Actuator
+
+Exposes endpoints to monitor and manage the application, easyly get DevOps out-of-the-box, simply add dependency to the
+POM file. Rest endpoints are automatically added to your application. Endpoints are prefixed with : `/actuator`
+
+`localhost:8080/actuator/health` check the status of your application.
+
+```json
+{"status": "UP"}
+```
+
+To expose `localhost:8080/actuator/info` :
+
+```aplication.properties
+management.endpoints.web.exposure.include=health,info
+management.info.env.enabled=true
+info.app.name=My app
+info.app.deszcriotion=A super Cool App
+info.app.version=1.0.0
+```
+
+|Name|Description|
+|:--:|:--:|
+|/auditevents|Audit events for your app|
+|/beans|List of all beans registered in Spring App context|
+|/mappings|List of all @RequestMapping paths|
+|...||
+
+[Full list](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.endpoints)
+
+By defauklt only the `/health` is exposed, you can expose all with the wildcard :
+
+```aplication.poperties
+management.endpoints.web.exposure.include=*
+```
 
 ## Lexicon
 
