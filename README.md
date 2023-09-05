@@ -51,14 +51,29 @@ Standard directory structure :
   pom.xml
   🞃 src
     🞃 main
-      🞂 java
-      🞂 resources
+      🞃 java
+        🞃 group
+          🞃 artifactId
+            🞃 appName
+              🞂 controller
+              🞂 entity
+            AppNameApplication.java
+      🞃 resources
+        🞂 static
+        🞂 templates
       🞂 webapp
     🞃 test
       🞂 java
+        🞃 group
+          🞃 artifactId
+            🞃 appName
+              🞂 controller
+              🞂 entity
+            AppNameApplicationTest.java
       🞂 resources
   🞂 target
 ```
+
 |Directory|Description|
 |:---:|:---:|
 |src/main/java|Your Java source code|
@@ -81,7 +96,44 @@ List of projects we depend on, Spring, Hibernate, etc.
 
 Additional custom tasks to run → generate JUnit test reports etc.
 
+### Exploring generated files
 
+- mvnw → Maven Wrapper Files, allows you to run a Maven project.
+  If the correct version of Maven is not found on the computer
+
+  - mvnw.cmd → to launch commands `> mvnw clean compile test` for `Windows`
+  - mvnw.sh → to launch commands `./mvnw clean compile test` for `Linux` / `Mac`
+
+ If you have Maven insatlled previously, you can ignore/delete the `mvnw` files & just use Maven as usual :
+
+ ```bash
+# example 
+mvn clean compile test
+```
+
+- pom file (read above)
+
+- Java Source Code
+  
+  Main Spring Boot aplication class, created by initializr and your controllers
+
+- `resources/applications.properties` to add custom properties or config.
+  ```aplication.properties
+  # configure my props
+  coach.name=Mickey Mouse
+  ```
+  ```java
+  @RestController
+  public class MyController {
+  
+    @Value("${coach.name}")
+    private String coachName;
+  
+    ...
+  }
+  ```
+
+  **⚠** Do not use the `src/main/webapp` if your aplication is packaged as a `JAR` **⚠** Only works with WAR packaging.
 
 ## Lexicon
 
