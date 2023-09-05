@@ -212,6 +212,34 @@ By defauklt only the `/health` is exposed, you can expose all with the wildcard 
 management.endpoints.web.exposure.include=*
 ```
 
+```xml
+<!-- add support to actuator -->
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+### Exclude Endpoints
+
+```aplication.properties
+# Exclude individual endpoints
+management.endpoints.web.exposure.exclude=health,info
+```
+
+[More details](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready)
+
+### Securing Endpoints
+
+```xml
+<!-- add support to security -->
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+<!-- password is in console -->
+```
+
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
