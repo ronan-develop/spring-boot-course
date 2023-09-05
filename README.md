@@ -135,6 +135,40 @@ mvn clean compile test
 
   **⚠** Do not use the `src/main/webapp` if your aplication is packaged as a `JAR` **⚠** Only works with WAR packaging.
 
+## Spring Boot starters
+
+- A curated list of Maven dependencies.
+- A collection of dependencies grouped together
+- Tested and verified by the Spring Developement Team
+- Makes it much easier for the developper to get started
+- Reduces the amount of Maven configuration
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+<!-- A collection of Maven dependencies -->
+  <artifactId>spring-boot-start-web</artifactId>
+<!-- contains spring-web spring-webmvc hibernate-validator json tomcat ... -->
+</dependency>
+```
+
+In spring initializr just select `Spring Web`, there are 30+ starters from the spring deveopment team
+
+|Name|Description|
+|:---:|:---:|
+|spring-boot-starter-web|Building web apps, includes validation, REST, uses Tomcat as default|
+|spring-boot-starter-security|Adding Spring Security Support|
+|spring-boot-starter-jpa|Spring database suport with JPA & Hibernate|
+|...||
+
+Benefits of the Spring boot Starter Parent :
+
+- Default Maven config
+- Dependency management
+  - use version on parent only
+  - `spring-boot-starter-*` dependencies inherit version from parent
+- Default configuration of Spring Boot plugin
+
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
