@@ -7,6 +7,8 @@
 - [Overview](#overview)
 - [Maven](#maven)
   - [pom](#pom.xml)
+- [Spring Boot starters](#spring-boot-starters)
+- [Dev Tools](#dev-tools)
 
 - [Lexicon](#lexicon)
 
@@ -168,6 +170,10 @@ Benefits of the Spring boot Starter Parent :
   - use version on parent only
   - `spring-boot-starter-*` dependencies inherit version from parent
 - Default configuration of Spring Boot plugin
+
+## Dev Tools
+
+Plug-in autmatically restarts your application when code is updated, simply add dependenciy to the POM file.
 
 ## Lexicon
 
