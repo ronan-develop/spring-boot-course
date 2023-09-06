@@ -209,7 +209,7 @@ info.app.version=1.0.0
 
 [Full list](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator.endpoints)
 
-By defauklt only the `/health` is exposed, you can expose all with the wildcard :
+By default only the `/health` is exposed, you can expose all with the wildcard :
 
 ```aplication.poperties
 management.endpoints.web.exposure.include=*
