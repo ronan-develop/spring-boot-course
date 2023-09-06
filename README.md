@@ -258,17 +258,37 @@ Option 2 : Use Spring Boot Maven plugin
 
 ## Spring Core
 
-### Inversion of Control
+### Dependency Inversion principle
+
+> prefer this :
+
+```txt
+------------     ---------<I>-      -----------------
+- Employee -  →  - DBService -   ←  - DBServiceImpl -
+------------     -------------      -----------------
+```
+
+> instead of :
+
+```txt
+------------     -------------
+- Employee -  →  - DBService -
+------------     -------------
+```
+
+### Dependency injection
+
+👩🏾‍🏫 <ins>Implementation details must depend on the high level notions.</ins>
 
 Outsourcing construction and management of object. The Spring Container works like a Factory. The clients
-delegates to another object the responsibility of a providing its dependencies.
+delegates to another object / to a container, the responsibility of a providing its dependencies.
+
+<ins>**Purpose is to separate technical code from business code.**</ins>
 
 **🛈Autowiring** <ins>implements</ins> `Dependency injection`.
 
 - Create & manages objects (inversion of control)
 - Inject object dependencies (Dependencies Injection)
-
-
 
 ## Lexicon
 
