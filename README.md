@@ -16,6 +16,7 @@
     - [Dependency Injection](#dependency-injection)
     - [Component Scanning](#component-scanning)
     - [Setter Injection](#setter-injection)
+    - [Primary Annotation](#primary-annotation)
 
 - [Lexicon](#lexicon)
 
@@ -401,6 +402,51 @@ public class DemoController {
   }
 }
 ```
+
+### Primary Annotation
+
+Alternate solution is to use the `@Primary` annotation
+
+```java
+...
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
+public class TennisCoach implements Coach {
+
+  @Override
+  public String getDailyWorkout() {
+    return "Practice Tennis for 20 minutes";
+  }
+}
+```
+And the controller became :
+
+```java
+...
+@RestController
+public class DemoController {
+
+  private Coach myCoach;
+
+  @Autowired
+  public DemoController(Coach theCoach) {
+  // above, now no need for @Qualifier
+    myCoach = theCoach;
+  }
+
+  @GetMapping("/dailyworkout")
+  public String getDailyWorkout() {
+
+    return myCoach.getDailyWorkout();
+  }
+}
+```
+
+**⚠️** You can't have multiple class with the `@Primary` annotation
+
+`@Primary` has priority but you can mix with `@Qualifier` but `@Qualifier` has the higher priority !
 
 ## Lexicon
 
