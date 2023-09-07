@@ -17,6 +17,7 @@
     - [Component Scanning](#component-scanning)
     - [Setter Injection](#setter-injection)
     - [Primary Annotation](#primary-annotation)
+    - [Lazy Initialization](#lazy-initialization)
 
 - [Lexicon](#lexicon)
 
@@ -447,6 +448,33 @@ public class DemoController {
 **⚠️** You can't have multiple class with the `@Primary` annotation
 
 `@Primary` has priority but you can mix with `@Qualifier` but `@Qualifier` has the higher priority !
+
+### Lazy Initialization
+
+Instead of creating all beans up front, we can specify lazy initialization; bean will only initialized in the following cases :
+
+- It si needed for a dependency
+- It is explicitly requested
+
+> Add the @Lazy annotation to a given class and it won't be created
+
+If you want to make it globally in `application.properties` :
+
+```application.properties
+spring.main.lazy-initialization=true
+```
+**+** Advantages :
+
+Only create objects as needed, may help with faster startup time,
+
+**⁻** Disadvantages :
+
+If you have web related components like `@RestController`, not created until requested, may not discover configuration
+issue ubtil too late and verify you have enough memory for all beans once created.
+
+> Lazy initialization feature is disabled by default.
+
+
 
 ## Lexicon
 
