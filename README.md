@@ -350,6 +350,58 @@ public class BlogApplication {
 |:--:|:--:|
 |Field Injection :|Makes the code harder to unit test|
 
+But if you have more than one class which implements the same interface, wich one you have to choose ?
+
+```java
+...
+import org.springframework.stereotype.Component;
+
+@Component
+public class TennisCoach implements Coach {
+
+  @Override
+  public String getDailyWorkout() {
+    return "Practice Tennis for 20 minutes";
+  }
+}
+```
+
+```java
+import org.springframework.stereotype.Component;
+
+@Component
+public class BasketBallCoach implements Coach {
+
+  @Override
+  public String getDailyWorkout() {
+    return "Practice Basketball for 20 minutes";
+  }
+}
+```
+
+You can be specific with the `@Qualifier`
+
+```java
+...
+@RestController
+public class DemoController {
+
+  private Coach myCoach;
+
+  @Autowired
+  public DemoController(@Qualifier("tennisCoach") Coach theCoach) {
+  // above we specify the bean id: tennisCoach, same name as class in camelCase
+    myCoach = theCoach;
+  }
+
+  @GetMapping("/dailyworkout")
+  public String getDailyWorkout() {
+
+    return myCoach.getDailyWorkout();
+  }
+}
+```
+
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
