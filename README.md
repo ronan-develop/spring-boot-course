@@ -11,7 +11,7 @@
 - [Dev Tools](#dev-tools)
 - [Actuator](#actuator)
 - [run from CLI](#run-from-the-command-line)
-- [Custom application properties](#custom-application-properties)
+- [Spring Core](#spring-core)
 
 - [Lexicon](#lexicon)
 
