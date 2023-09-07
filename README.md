@@ -343,7 +343,8 @@ public class BlogApplication {
 |:--:|:--:|
 |Constructor Injection :|Use when you have required dependencies|
 |Setter Injection :|Use when you have optional dependencies|
-**Not recommended
+
+**Not recommended **
 
 |What ? |When ? |
 |:--:|:--:|
