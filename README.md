@@ -336,14 +336,22 @@ public class BlogApplication {
 }
 ```
 ### Setter Injection
+
+**Recommended by the Spring.io team**
+
 |What ? |When ? |
 |:--:|:--:|
-|Constructor Injection||
+|Constructor Injection :||
 |-|Use when you have required dependencies|
-|-|Generally recommended by the Spring.io team|
-|Setter Injection||
+|Setter Injection :||
 |-|Use when you have optional dependencies|
-|-|If dependency is not provided|
+
+**Not recommended
+
+|What ? |When ? |
+|:--:|:--:|
+|Field Injection :||
+|-|Makes the code harder to unit test|
 
 ## Lexicon
 
