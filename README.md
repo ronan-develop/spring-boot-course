@@ -341,17 +341,13 @@ public class BlogApplication {
 
 |What ? |When ? |
 |:--:|:--:|
-|Constructor Injection :||
-|-|Use when you have required dependencies|
-|Setter Injection :||
-|-|Use when you have optional dependencies|
-
+|Constructor Injection :|Use when you have required dependencies|
+|Setter Injection :|Use when you have optional dependencies|
 **Not recommended
 
 |What ? |When ? |
 |:--:|:--:|
-|Field Injection :||
-|-|Makes the code harder to unit test|
+|Field Injection :|Makes the code harder to unit test|
 
 ## Lexicon
 
