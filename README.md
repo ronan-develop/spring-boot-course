@@ -6,7 +6,7 @@
 - [REST controller](#create-a-rest-controller)
 - [Overview](#overview)
 - [Maven](#maven)
-  - [pom](#pom.xml)
+  - [pom](#pom-file)
 - [Spring Boot starters](#spring-boot-starters)
 - [Dev Tools](#dev-tools)
 - [Actuator](#actuator)
@@ -90,7 +90,7 @@ Standard directory structure :
 |src/test|Unit testing code and properties|
 |target|Destination directory for compiled code|
 
-### pom.xml
+### pom file
 
 - Project meta data
   
