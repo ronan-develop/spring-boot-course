@@ -196,7 +196,7 @@ To expose `localhost:8080/actuator/info` :
 management.endpoints.web.exposure.include=health,info
 management.info.env.enabled=true
 info.app.name=My app
-info.app.deszcriotion=A super Cool App
+info.app.deszcription=A super Cool App
 info.app.version=1.0.0
 ```
 
@@ -278,17 +278,59 @@ Option 2 : Use Spring Boot Maven plugin
 
 ### Dependency injection
 
-👩🏾‍🏫 <ins>Implementation details must depend on the high level notions.</ins>
+ <ins>Implementation details must depend on the high level notions.</ins>
 
 Outsourcing construction and management of object. The Spring Container works like a Factory. The clients
 delegates to another object / to a container, the responsibility of a providing its dependencies.
 
-<ins>**Purpose is to separate technical code from business code.**</ins>
+:heavy_exclamation_mark: <ins>**Purpose is to separate technical code from business code.**</ins>
 
-**🛈Autowiring** <ins>implements</ins> `Dependency injection`.
+**🛈 Autowiring** <ins>implements</ins> `Dependency injection`.
 
 - Create & manages objects (inversion of control)
 - Inject object dependencies (Dependencies Injection)
+
+## Component Scanning
+
+- `@SpringBootApplication` ↦ **Contains following annotations :**
+  
+  |Annotation|Description|
+  |:--:|:--:|
+  |`@EnableAutoConfiguration`|Enables Spring Boot's auto-conf support|
+  |`@ComponentScan`|Enables component scans sub-packages|
+  |`@Configuration`|Able to register extra beans with `@Bean` or import other configuration class|
+  
+```java
+...
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MyDemoApplicatrion {
+
+  public static void main(String[] args) {
+    SpringApplication.run(MyDemoApplicatrion, args);
+  }
+}
+// Behind the scenes, creates application context, registers all beans & starts embedded server
+```
+🛈 By default, Spring Boot starts component scanning & automatically component scans package and sub-packages
+
+|Annotation|Description|
+|:--:|:--:|
+|`@SpringApplication`|Bootstrap the Spring Boot Application|
+
+If you want SpringBoot scan other packages with another ArtifactId you can specify the location in the annotation :
+```java
+...
+@SpringBootApplication(
+    scanBasePackages= {"com.ArtifactId",
+                       "com.anotherArtifacId",
+                       "com.yetAnotherArtifacId"})
+public class BlogApplication {
+  ...
+}
+```
 
 ## Lexicon
 
