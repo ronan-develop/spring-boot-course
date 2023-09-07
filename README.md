@@ -12,6 +12,9 @@
 - [Actuator](#actuator)
 - [run from CLI](#run-from-the-command-line)
 - [Spring Core](#spring-core)
+    - [Dependency Inversion Principle](#dependency-inversion-principle)
+    - [Dependency Injection](#dependency-injection)
+    - [Component Scanning](#component-scanning)
 
 - [Lexicon](#lexicon)
 
@@ -258,7 +261,7 @@ Option 2 : Use Spring Boot Maven plugin
 
 ## Spring Core
 
-### Dependency Inversion principle
+### Dependency Inversion Principle
 
 > prefer this :
 
@@ -290,7 +293,7 @@ delegates to another object / to a container, the responsibility of a providing 
 - Create & manages objects (inversion of control)
 - Inject object dependencies (Dependencies Injection)
 
-## Component Scanning
+### Component Scanning
 
 - `@SpringBootApplication` ↦ **Contains following annotations :**
   
