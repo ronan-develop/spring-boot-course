@@ -342,7 +342,7 @@ public class BlogApplication {
 |-|Use when you have required dependencies|
 |-|Generally recommended by the Spring.io team|
 |Setter Injection||
-|-|Use when you have optional dependecies|
+|-|Use when you have optional dependencies|
 |-|If dependency is not provided|
 
 ## Lexicon
