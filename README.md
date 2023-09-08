@@ -22,6 +22,7 @@
     - [Bean Lifecycle Methods](#bean-lifecycle-methods)
 
 - [Hibernate/JPA overview](#hibernate-jpa)
+- [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
 - [Lexicon](#lexicon)
 
@@ -582,6 +583,66 @@ Difference between `@Component` and doing a configuration with `@Configuration` 
 of your config for a simple class `@Component` is sufficient
 
 ## Hibernate JPA
+
+### Quick Overview
+
+Hibernate is a framework for persisting Java objects a database.
+
+- It handles all of the low-level SQL.
+- Minimizes the amount of JDBC code.
+- provides the ORM.
+
+JPA for Jakarta PErsistence API
+
+- Standard API for ORM.
+- Defines a set of interfaces.
+- Requires an implementation to be usable.
+
+Saving a Pojo with JPA :
+
+```java
+Student theStudent = new Student("Bob", "Burnquist", "bob-burnquits@email.com");
+
+entityManager.persit(theStudent);
+```
+
+Retrieve POJO with JPA :
+
+```java
+Student theStudent = new Student("Bob", "Burnquist", "bob-burnquits@email.com");
+
+entityManager.persit(theStudent);
+
+...
+
+// retrieve by Id
+int studentId = 1;
+
+Student myStudent = entityManager.find(Student.class, studentId);
+```
+
+Querying for Java Objects :
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery("from Student", Student.class);
+
+List<Student> students = theQuery.getResultList();
+```
+
+Hibernate / JPA and JDBC :
+
+Both use JDBC for all database communications. it's just another abstraction on top of JDBC.
+
+Settings in `application.properties` :
+
+```application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/table_name
+spring.datasource.username=root
+spring.datasource.password=***
+```
+
+## Turn off banner chatter
+
 
 ## Lexicon
 
