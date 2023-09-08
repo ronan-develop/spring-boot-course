@@ -533,9 +533,9 @@ public class TennisCoach implements Coach {
 When the container started : 
 
 ```txt
-               ------------------      -------------------------     ---------------------------   ----------------
-Container  →   - Bean Instiated -   →  - Dependencies injected -  →  - Internal Spring Process - → - Your  Method -
- started       ------------------       ------------------------     ---------------------------   ----------------
+             ------------------      -------------------------     ---------------------------   ----------------
+Container  → - Bean Instiated -   →  - Dependencies injected -  →  - Internal Spring Process - → - Your  Method -
+ started     ------------------      -------------------------     ---------------------------   ----------------
                                                  ↓
                                        Container Is Shutdown
                                                  ↓
