@@ -643,6 +643,13 @@ spring.datasource.password=***
 
 ## Turn off banner chatter
 
+```application.properties
+...
+# turn off
+spring.main.banner-mode=off
+# reduce login level
+logging.level.root=warn
+```
 
 ## Lexicon
 
