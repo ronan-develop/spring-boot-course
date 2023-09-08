@@ -23,6 +23,7 @@
 
 - [Hibernate/JPA overview](#hibernate-jpa)
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
+- [JPA Annotations](#jpa-annotations)
 
 - [Lexicon](#lexicon)
 
@@ -640,6 +641,111 @@ spring.datasource.url=jdbc:mysql://localhost:3306/table_name
 spring.datasource.username=root
 spring.datasource.password=***
 ```
+
+### JPA Annotations
+
+**Minimum** for the Entity :
+- Must be annotated with `@Entity`
+- Must have a public or protected no-argument constructor
+
+> 🛈 If you don't de clare any constructor, java will provide a no-arg for free
+>
+> If  you declare constructors with arguments, java will not provide constructor
+> you have to explicitily declare `@No-Arg`
+
+Map class to database table :
+```java
+@Entity
+@Table(name="student") // -> Optional but not recomended in case of refactoring
+public class Student {
+
+  @Id
+  @Column(name="id")
+  private int id;
+
+  @Column(name="first_name") // -> Optional but not recomended in case of refactoring
+  private String firstName;
+...
+}
+```
+In JPA we have to specify the primary_key by :
+
+```java
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@Column(name="id")
+private int id;
+```
+
+ID Gneration Strategies :
+
+|Name|Description|
+|:--:|:--:|
+|GenerationType.AUTO|Pick an appropriate strategy for the particular database|
+|GenerationType.IDENTITY|Assign primary keys using database identity Column|
+|GenerationType.SEQUENCE|Assign primary keys using a database sequence|
+|GenerationType.TABLE|Assign primary keys unsing an undelying database table to ensure uniqueness|
+
+You can define your own CUSTOM Strategy. Create implementations of `org.hibernate.id.IdentifierGenerator`, Override `public Serailizable Generate(...)`
+
+Class example :
+
+```java
+@Entity
+@Table(name=student")
+public class Student {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="id")
+  private int id;
+
+  @Column(name="first_name")
+  private String firstName;
+
+  @Column(name="last_name")
+  private String lastName;
+
+  @Column(name="email")
+  private String email;
+
+  public Student() {
+
+  }
+
+  public Students(
+    String firstName,
+    String lastname,
+    String email) {
+
+    this.firstName = firstName;
+    this.lasstName = lastName;
+    this.email = email;
+  }
+
+  public int getId() {
+
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+...
+
+  @Override
+  public String toString() {
+
+    return "Student{" +
+            "id" + id +
+            " , firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\n'' +
+            ", email='" + email + '\n'' +
+            '}';
+  }  
+}
+```
+
 
 ## Turn off banner chatter
 
