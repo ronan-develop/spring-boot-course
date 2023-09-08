@@ -19,7 +19,7 @@
     - [Primary Annotation](#primary-annotation)
     - [Lazy Initialization](#lazy-initialization)
     - [Bean Scope](#bean-scope)
-    - [Bean Lifcecycle Methods](#bean-lifecycle-methods)
+    - [Bean Lifecycle Methods](#bean-lifecycle-methods)
 
 - [Lexicon](#lexicon)
 
@@ -528,7 +528,7 @@ public class TennisCoach implements Coach {
   ...
 }
 ```
-### Bean Lifecycle Methods - Annotations
+### Bean Lifecycle Methods
 
 When the container started : 
 
