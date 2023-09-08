@@ -20,6 +20,7 @@
     - [Lazy Initialization](#lazy-initialization)
     - [Bean Scope](#bean-scope)
     - [Bean Lifecycle Methods](#bean-lifecycle-methods)
+-[Hibernate/JPA overview](#hibernate-jpa)
 
 - [Lexicon](#lexicon)
 
@@ -575,6 +576,11 @@ You can do the same for `@PreDestroy`.
 >
 > The client code must clean up prototype-scoped objects and release
 > expensive resources that the prototype bean(s) are holding.
+
+Difference between `@Component` and doing a configuration with `@Configuration` is mainly for the complexity
+of your config for a simple class `@Component` is sufficient
+
+## Hibernate JPA
 
 ## Lexicon
 
