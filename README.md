@@ -18,6 +18,8 @@
     - [Setter Injection](#setter-injection)
     - [Primary Annotation](#primary-annotation)
     - [Lazy Initialization](#lazy-initialization)
+    - [Bean Scope](#bean-scope)
+    - [Bean Lifcecycle Methods](#bean-lifecycle-methods)
 
 - [Lexicon](#lexicon)
 
@@ -380,7 +382,7 @@ public class BasketBallCoach implements Coach {
   }
 }
 ```
-
+### Qualifier
 You can be specific with the `@Qualifier`
 
 ```java
@@ -474,7 +476,94 @@ issue until too late and verify you have enough memory for all beans once create
 
 > Lazy initialization feature is disabled by default.
 
+### Bean Scope
 
+⚠ The default scope in spring is **`Singleton`**.
+<ins>All the dependency injections for the bean, will reference the same bean !</ins>
+
+<ins>Example :</ins>
+
+When instanciating with [`@Qualifier`](#qualifier) :
+
+```java
+@RestController
+public class DemoController {
+  private Coach myCoach;
+  private Coach anotherCoach;
+
+  @Autowired
+  public DemoController(
+                @Qualifier("tennisCoach") Coach theCoach,
+                @Qualifier("tennisCoach) Coach theOtherCoach) {
+    myCoach = theCoach;
+    otherCoach = theOtherCoach;
+  }
+...
+}
+```
+⚠ <ins>Both point the same instance</ins> ⚠
+
+Additional Spring Bean scopes :
+
+|Scope|Description|
+|:--:|:--:|
+|singleton|Create a single shared instance of the bean. Default scope.|
+|prototype|Creates a new bean instance for each container request|
+|request|Scoped to an HTTP web request. Only used for web apps.|
+|session|Scoped to an HTTP web session. Only used for web apps.|
+|global-session|Scoped to a global HTTP web session. Only used for web apps.|
+
+**Prototype Scope Example**
+
+New object instance for each injection. Points two different areas of memory, beans.
+
+```java
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class TennisCoach implements Coach {
+  ...
+}
+```
+### Bean Lifecycle Methods - Annotations
+
+When the container started : 
+
+```txt
+               ------------------      -------------------------     ---------------------------   ----------------
+Container  →   - Bean Instiated -   →  - Dependencies injected -  →  - Internal Spring Process - → - Your  Method -
+ started       ------------------       ------------------------     ---------------------------   ----------------
+                                                                 ↓
+                                                         Container Is Shutdown
+                                                                 ↓
+                                                   ------------------------------   -------- 
+                                                   - Your Custom destroy Method - → - STOP -
+                                                   ------------------------------   --------
+```
+
+You can add custom during bean initialazation, calling custom business logic methods,
+setting up handles to resources (db, socket, files etc.). You can also add custom
+code during bean destruction.
+
+```java
+@Component
+public class TennisCoach implements Coach {
+  public TennisCoach() {
+
+    System.out.println("In constructor : " + getClass().getSimpleName();
+  }
+
+  @PostContruct
+  public void doMyStartUpStuff() {
+    System.out.println("In doMyStartUpStuff : " + getClass().getSimpleName();
+  }
+...
+}
+```
+You can do the same for `@PreDestroy`.
 
 ## Lexicon
 
