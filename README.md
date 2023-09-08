@@ -536,12 +536,12 @@ When the container started :
                ------------------      -------------------------     ---------------------------   ----------------
 Container  →   - Bean Instiated -   →  - Dependencies injected -  →  - Internal Spring Process - → - Your  Method -
  started       ------------------       ------------------------     ---------------------------   ----------------
-                                                                 ↓
-                                                         Container Is Shutdown
-                                                                 ↓
-                                                   ------------------------------   -------- 
-                                                   - Your Custom destroy Method - → - STOP -
-                                                   ------------------------------   --------
+                                                      ↓
+                                              Container Is Shutdown
+                                                      ↓
+                                        ------------------------------   -------- 
+                                        - Your Custom destroy Method - → - STOP -
+                                        ------------------------------   --------
 ```
 
 You can add custom during bean initialazation, calling custom business logic methods,
