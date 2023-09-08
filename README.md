@@ -565,6 +565,17 @@ public class TennisCoach implements Coach {
 ```
 You can do the same for `@PreDestroy`.
 
+> For "prototype" scoped beans, Spring does not call the destroy method.
+> 
+> In contrast to the other scopes, Spring does not manage the complete
+> lifecycle of a prototype bean
+> Te container instantiates, configures, and otherwise assembles a
+> prototype object, and hands it to the client, with no further record
+> of that prototype instance.
+>
+> The client code must clean up prototype-scoped objects and release
+> expensive resources that the prototype bean(s) are holding.
+
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
