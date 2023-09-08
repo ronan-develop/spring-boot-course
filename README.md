@@ -470,7 +470,7 @@ Only create objects as needed, may help with faster startup time,
 **⁻** Disadvantages :
 
 If you have web related components like `@RestController`, not created until requested, may not discover configuration
-issue ubtil too late and verify you have enough memory for all beans once created.
+issue until too late and verify you have enough memory for all beans once created.
 
 > Lazy initialization feature is disabled by default.
 
