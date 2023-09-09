@@ -31,7 +31,7 @@
 
 [Spring Initializr](https://start.spring.io/)
 
-## Create A REST Controller
+## Create a REST Controller
 
 Create a new folder/package under your the app folder you define in the initializer
 (eg : controller), and a new `Class` inside.
@@ -745,7 +745,87 @@ public class Student {
   }  
 }
 ```
+### Saving POJO
 
+>D.A.O (Data acess Object) responsible for interfacing
+>with the database (common Design Patter).
+
+JPA Entity Manager is the main component for the CRUD. We can autowired the JPA Manager
+into our DAO.
+
+```txt
+-----------------      ------------------     ---------------   ------
+-  Student DAO  -   →  - Entity Manager -  →  - Data Source - → - DB -
+-----------------      ------------------     ---------------   ------
+```
+1. Define DAO interface
+
+  ```java
+  public interface StudentDAO {
+  
+    void save(Student theStudent);
+  }
+  ```
+
+2. Define DAO implementation
+
+  ```java
+  @Repository
+  public class StudentDAOImpl implements StudentDAO {
+  
+    private EntityManager em;
+  
+    @Autowired
+    public StudentDAOImpl(EntityManager theEntityManager) {
+    // contructor for studentDAOImpl, inject Entity Manager
+      em = theEntityManager;
+    }
+  
+    @Override
+    @Transactional // handles transaction management
+    public void save(Student theStudent) {
+  
+      em.persist(theStudent);
+    }
+  }
+  ```
+
+  >Spring provides the `@Transactional` annotation, it automatically begin and end a 
+  >transaction for JPA code
+  >
+  >Spring provides the `@Repository` annotation, it's a sub annotation for `@Component`
+
+3.  Update application
+
+In the Controller :
+
+```java
+@SpringBootApplication
+public class CrudDemoApplication {
+
+  public static void main(String[] args) {
+
+    SpringApplication.run(CrudDemoApplication.class, args);
+  }
+
+  @Bean
+  public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+
+    return -> {
+
+      createStudent(studentDAO);
+    }
+  }
+
+  private void createStudent(StudentDAO studentDAO) {
+
+      System.out.println("Creating new student object ...");
+      tempStudent = new Student("Bob", "Burnquist", "bob-burnquits@email.com");
+      studentDAO.save(tempStudent);
+      System.out.println("Student object is saved with the id : " + tempStudent.getId());
+    }
+}
+```
 
 ## Turn off banner chatter
 
