@@ -24,6 +24,7 @@
 - [Hibernate/JPA overview](#hibernate-jpa)
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 - [JPA Annotations](#jpa-annotations)
+- [JPA Save](#saving-pojo)
 
 - [Lexicon](#lexicon)
 
