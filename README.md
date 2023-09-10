@@ -24,7 +24,8 @@
 - [Hibernate/JPA overview](#hibernate-jpa)
   - [JPA Annotations](#jpa-annotations)
   - [JPA Save](#saving-pojo)
-  - [JPA Reading Objects](#reading-objects)
+  - [JPA Reading Single Object](#reading-single-object)
+  - [JPA Reading Multiple Objects](#reading-multiple-objects)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -830,7 +831,7 @@ public class CrudDemoApplication {
 }
 ```
 
-### Reading Objects
+### Reading Single Object
 
 ```java
 Student myStudent = entityManager.find(Student.class, 1);
@@ -882,6 +883,9 @@ Student myStudent = entityManager.find(Student.class, 1);
     }
   }
   ```
+### Reading Multiple Objects
+
+
 
 ## Turn off banner chatter
 
