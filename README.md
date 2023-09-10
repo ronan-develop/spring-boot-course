@@ -24,6 +24,7 @@
 - [Hibernate/JPA overview](#hibernate-jpa)
   - [JPA Annotations](#jpa-annotations)
   - [JPA Save](#saving-pojo)
+  - [JPA Reading Objects](#reading-objects)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -828,6 +829,59 @@ public class CrudDemoApplication {
     }
 }
 ```
+
+### Reading Objects
+
+```java
+Student myStudent = entityManager.find(Student.class, 1);
+```
+
+1. Add a new method to DAO interface
+  ```java
+  public interface StudenDAO {
+  ...
+
+  Student findById(Integer id);
+  }
+  ```
+    
+2. Add new method to DAO implementation
+  ```java
+  public class StudentDAOImpl implements StudentDAO {
+
+    private EntityManager entity;
+    ...
+  
+    @Override // no need "@Transactional" because we are doing a query
+    public Student findById(Interger id) {
+
+      return entityManager.find(Student.class, id); // if not found return null
+    }
+  }
+  ```
+   
+3. Update the app
+  ```java
+  @SpringBootApplication {
+  ...
+    @Bean
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+
+      return runner -> {
+
+        readStudent(studentDAO);
+      };
+    }
+  }
+  ...
+  private void readStudent(StudentDAO studentDAO) {
+
+      Student myStudent = studentDAO.findById(3);
+
+      System.out.println("Found the student : " + myStudent);
+    }
+  }
+  ```
 
 ## Turn off banner chatter
 
