@@ -21,7 +21,7 @@
     - [Bean Scope](#bean-scope)
     - [Bean Lifecycle Methods](#bean-lifecycle-methods)
 
-- [Hibernate/JPA overview](#hibernate-jpa)+
+- [Hibernate/JPA overview](#hibernate-jpa)
   - [JPA Annotations](#jpa-annotations)
   - [JPA Save](#saving-pojo)
 
