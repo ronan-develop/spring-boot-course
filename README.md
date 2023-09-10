@@ -21,10 +21,11 @@
     - [Bean Scope](#bean-scope)
     - [Bean Lifecycle Methods](#bean-lifecycle-methods)
 
-- [Hibernate/JPA overview](#hibernate-jpa)
+- [Hibernate/JPA overview](#hibernate-jpa)+
+  - [JPA Annotations](#jpa-annotations)
+  - [JPA Save](#saving-pojo)
+
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
-- [JPA Annotations](#jpa-annotations)
-- [JPA Save](#saving-pojo)
 
 - [Lexicon](#lexicon)
 
