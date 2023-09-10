@@ -885,8 +885,98 @@ Student myStudent = entityManager.find(Student.class, 1);
   ```
 ### Reading Multiple Objects
 
+`JPQL` is query language for retrieving objects, similar concept to SQL :
+`where`, `like`, `order by`, `join`, `in`, etc.
 
+**⚠** JPQL is based on the <ins>**entity**</ins> name & entity <ins>**fields**</ins> 
 
+eg : Retrieving all students
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery(
+                                  "FROM Student", Student.class);
+
+List<Student> students = theQuery.getResultlist();
+```
+example with search by field :
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery(
+                                "FROM Student WHERE lastname='Burnquist'", Student.class);
+
+List<Student> students = theQuery.getResultlist();
+```
+Using predicate `OR` :
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery(
+                                "FROM Student WHERE lastname='Burnquist' OR firstname='Daffy'", Student.class);
+
+List<Student> students = theQuery.getResultlist();
+```
+
+Using predicate `LIKE` :
+
+> eg : match the email that ends with @cartoon.acme
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery(
+                                "FROM Student WHERE email LIKE '%@cartoon.acme'", Student.class);
+
+List<Student> students = theQuery.getResultlist();
+```
+Using Named Parameters :
+
+```java
+public List<Student> findByLastName(String theLastName) {
+
+  TypedQuery<Student> theQuery = entityManager.createQuery(
+                                  "FROM Student WHERE lastname=:theData", Student.class);
+
+  theQuery.setParameter("theData"; theLastName);
+
+  return theQuery.getResultList();
+}
+```
+1. Add a new metho to DAO interface
+  
+  ```java
+  ...
+  public interface StudentDAO {
+  ...
+    <List>Student findAll();
+  }
+  ```
+
+2. Add new method to DAo Implementation
+  
+  ```java
+  public class StudentDAOImpl implements StudentDAO {
+
+    private EntityManager entityManager;
+
+    @Override // on read only no need to add @Transactional
+    public List<Student> findAll() {
+
+      TypedQuery<Student> theQuery = entitManager.createQuery("FROM Student", Student.class);
+      return theQuery.getResultList();
+    }
+
+  }
+  ```
+
+3. Update main
+
+  ```java
+  @SpringBootApplication
+  public class CrudDemoApplication {
+
+    public static void main(String[] args) {
+
+      
+    }
+  }
+  ```
 ## Turn off banner chatter
 
 ```application.properties
