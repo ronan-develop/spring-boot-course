@@ -1017,10 +1017,16 @@ List<Student> students = theQuery.getResultlist();
 
 ### Update an Object
 
-<ins>**Retreive** the **Entity** </ins>you want to **`Update`**
+```java
+T find(Class<T> entityClass, Object primaryKey)
+```
+
+<ins>**Retreive** the **Entity** </ins>you want to **`Update`** by the id or somlething else
 
 ```java
 Student theStudent = entityManager.find(Student.class, 1);
+// OR by id the primary key
+Student theStudent = entityManager.findById(1)
 
 theStudent.setFirstName("Robert");
 entityManager.merge(theStudent);
@@ -1061,6 +1067,8 @@ logging.level.root=warn
 ```
 
 ### Delete an Object
+
+
 
 ## Lexicon
 
