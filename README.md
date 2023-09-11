@@ -25,7 +25,7 @@
   - [JPA Annotations](#jpa-annotations)
   - [JPA Save](#saving-pojo)
   - [JPA Reading Single Object](#reading-single-object)
-  - [JPA Reading Multiple Objects](#reading-multiple-objects)
+  - [JPA Reading Multiple Objects | JPQL](#reading-multiple-objects)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -938,6 +938,22 @@ public List<Student> findByLastName(String theLastName) {
   return theQuery.getResultList();
 }
 ```
+
+Using criteria `order by` :
+
+> 🛈default : sort ascending
+> 
+> `order by` lastName `desc`
+> 
+> `order by` lastName `asc`
+
+```java
+TypedQuery<Student> theQuery = entityManager.createQuery(
+                                "FROM Student order by lastname", Student.class);
+
+List<Student> students = theQuery.getResultlist();
+```
+
 1. Add a new method to DAO interface
   
   ```java
