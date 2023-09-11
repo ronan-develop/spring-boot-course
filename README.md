@@ -938,7 +938,7 @@ public List<Student> findByLastName(String theLastName) {
   return theQuery.getResultList();
 }
 ```
-1. Add a new metho to DAO interface
+1. Add a new method to DAO interface
   
   ```java
   ...
@@ -948,7 +948,7 @@ public List<Student> findByLastName(String theLastName) {
   }
   ```
 
-2. Add new method to DAo Implementation
+2. Add new method to DAO Implementation
   
   ```java
   public class StudentDAOImpl implements StudentDAO {
@@ -973,7 +973,26 @@ public List<Student> findByLastName(String theLastName) {
 
     public static void main(String[] args) {
 
-      
+      SpringApplication.run(CrudDemoApplication.class, args);
+    }
+
+    @Bean
+    public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
+
+      return runner -> {
+
+        queryForStudents(studentDAO);
+     };
+    }
+
+    private void queryForStudents(StudentDAO studentDAO) {
+
+      List<Student> theStudents = studeDAO.findAll();
+
+      for(Student s : theStudents) {
+
+        System.out.println(s);
+      }
     }
   }
   ```
