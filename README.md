@@ -27,6 +27,7 @@
   - [JPA Reading Single Object](#reading-single-object)
   - [JPA Reading Multiple Objects | JPQL](#reading-multiple-objects)
   - [JPA Update an Object](#update-an-object)
+  - [JPA Delete an Object](#delete-an-object)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1058,6 +1059,8 @@ spring.main.banner-mode=off
 # reduce login level
 logging.level.root=warn
 ```
+
+### Delete an Object
 
 ## Lexicon
 
