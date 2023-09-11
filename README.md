@@ -26,6 +26,7 @@
   - [JPA Save](#saving-pojo)
   - [JPA Reading Single Object](#reading-single-object)
   - [JPA Reading Multiple Objects | JPQL](#reading-multiple-objects)
+  - [JPA Update an Object](#update-an-object)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1012,6 +1013,42 @@ List<Student> students = theQuery.getResultlist();
     }
   }
   ```
+
+### Update an Object
+
+<ins>**Retreive** the **Entity** </ins>you want to **`Update`**
+
+```java
+Student theStudent = entityManager.find(Student.class, 1);
+
+theStudent.setFirstName("Robert");
+entityManager.merge(theStudent);
+```
+
+**Update Multiple** objects :
+
+Below, I give all students the same Lastname.
+
+```java
+int numRowsUpdated = enjtityManager.createQuery(
+                            "UPDATE Student SET lastName='Tester'")
+                            .executeUpdate();
+```
+🛈 This operation <ins>**return**</ins> the number of rows that were updated.
+
+Repeat previous process,  
+1. update `DAO` with an update method
+2. `DAOImpl` with a `@Transactional` since we are writing in the database.
+
+```java
+@Override
+@Transactional
+public void update(Student theStudent) {
+  entityManager.merge(theStudent);
+}
+```
+3.  the `main Application`.
+
 ## Turn off banner chatter
 
 ```application.properties
