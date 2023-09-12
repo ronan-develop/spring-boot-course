@@ -1185,6 +1185,7 @@ logging.level.org.hibernate.SQL=debug
 logging.level.org.hibernate.orm.jdbc.bind=trace
 
 # Configure JPA Hibernate to create the tables
+# the "update" config will keep existing datain the table
 spring.jpa.hibernate.ddl-auto=create
 ```
 
