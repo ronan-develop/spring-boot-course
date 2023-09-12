@@ -1139,6 +1139,37 @@ public class CrudDemoApplication {
   }
 }
 ```
+
+Bonus Delete all :
+
+DAO :
+```java
+...
+int deleteAll();
+```
+
+DAOImpl :
+```java
+...
+@Override
+@Transactional
+public int deleteAll() {
+
+  return entityManager.createQuery("DELETE FROM  Students").executeUpdate();
+}
+```
+
+Main :
+```java
+...
+private deleteAllStudents(StudentDAO) {
+
+  System.out.println("Deleteing all the students);
+  int numRowsDeleted = studentDAO.deleteAll();
+  System.out.println("Deleted " + numRowsDeleted + " rows");
+}
+```
+
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
