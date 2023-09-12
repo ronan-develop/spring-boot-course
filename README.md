@@ -1068,8 +1068,77 @@ logging.level.root=warn
 
 ### Delete an Object
 
+For the `DELETE` you must retrieve the data you want to erase.
 
+```java
+int id = 1;
+Student theStudent = entityManager.find(Student.class, id);
 
+entityManager.remove(theStudent);
+```
+
+You can `DELETE` multiple data based on a condition :
+
+```java
+int numRowsDeleted = entityManager.createQuery(
+                                    "DELETE FROM Student WHERE lastName='Smith'")
+                                    .executeUpdate(); // excecute the statement
+
+/**
+* All
+*/
+int numRowsDeleted = entityManager.createQuery(
+                                    "DELETE FROM Student")
+                                    .executeUpdate();
+```
+1. the Interface
+
+```java
+public interface StudentDAO {
+  ...
+  void delete(Integer id);
+}
+```
+
+2. In the DAO implementation
+
+```java
+public class StudentDAOImpl implements StudentDAO {
+  ...
+  @Override
+  @Transactional
+  public void delete(Integer id) {
+
+    Student theStudent = entityManager.find(Student.class, id);
+    entityManager.remove(theStudent);
+  }
+}
+```
+
+3. Main app
+
+```java
+public class CrudDemoApplication {
+
+...
+
+  public CommandLineRunner commandLineRunner(StudenDAO studentDAO) {
+
+    return runner -> {
+
+      deleteStudent(studentDAO);
+    }
+  }
+
+  private void deleteStudent(StudentDAO studentDAO) {
+
+    int studentId = 3;
+    System.out.println("Deleting student id : " + studentId;
+
+    studentDAO.delete(studentId);
+  }
+}
+```
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
