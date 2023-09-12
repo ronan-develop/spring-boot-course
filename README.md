@@ -28,6 +28,7 @@
   - [JPA Reading Multiple Objects | JPQL](#reading-multiple-objects)
   - [JPA Update an Object](#update-an-object)
   - [JPA Delete an Object](#delete-an-object)
+  - [Tips on database](#tips-on-database)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1056,16 +1057,6 @@ public void update(Student theStudent) {
 ```
 3.  the `main Application`.
 
-## Turn off banner chatter
-
-```application.properties
-...
-# turn off
-spring.main.banner-mode=off
-# reduce login level
-logging.level.root=warn
-```
-
 ### Delete an Object
 
 For the `DELETE` you must retrieve the data you want to erase.
@@ -1168,6 +1159,28 @@ private deleteAllStudents(StudentDAO) {
   int numRowsDeleted = studentDAO.deleteAll();
   System.out.println("Deleted " + numRowsDeleted + " rows");
 }
+```
+### Tips on Database
+
+If you want to create tables once and then keep data use : update
+
+```aplication.properties
+spring.jpa.hibernate.ddl-auto=update
+```
+
+**⚠** Only use for `Basic` projects
+
+## Turn off banner chatter and log SQL statements
+
+```application.properties
+...
+# turn off
+spring.main.banner-mode=off
+# reduce login level
+logging.level.root=warn
+# log SQL
+logging.level.org.hibernate.SQL=debug
+logging.level.org.hibernate.orm.jdbc.bind=trace
 ```
 
 ## Lexicon
