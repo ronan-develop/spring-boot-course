@@ -1176,11 +1176,16 @@ spring.jpa.hibernate.ddl-auto=update
 ...
 # turn off
 spring.main.banner-mode=off
+
 # reduce login level
 logging.level.root=warn
+
 # log SQL
 logging.level.org.hibernate.SQL=debug
 logging.level.org.hibernate.orm.jdbc.bind=trace
+
+# Configure JPA Hibernate to create the tables
+spring.jpa.hibernate.ddl-auto=create
 ```
 
 ## Lexicon
