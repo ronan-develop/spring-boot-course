@@ -33,6 +33,7 @@
 - [REST Api](#rest-api)
     - [Status Code](#status-code)
     - [MIME CONTENT TYPE](#mime-content-type)
+    - [Hello World](#hello-world)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1216,7 +1217,7 @@ Message format is described by `MIME content type`.
 - Basic Syntax : `type/sub-type` eg : `text/html`, `text/plain` ...
 - Rest service with Json : `aplication/json`
 
-### Hello world
+### Hello World
 
 [Initializr](#https://start.spring.io/)
 
