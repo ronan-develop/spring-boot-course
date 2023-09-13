@@ -30,6 +30,9 @@
   - [JPA Delete an Object](#delete-an-object)
   - [Tips on database](#tips-on-database)
 
+- [REST Api](#rest-api)
+    - [Status Code](#status-code)
+
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
 - [Lexicon](#lexicon)
@@ -1188,6 +1191,24 @@ logging.level.org.hibernate.orm.jdbc.bind=trace
 # the "update" config will keep existing datain the table
 spring.jpa.hibernate.ddl-auto=create
 ```
+
+## Rest Api
+
+><ins>**🛈Business**</ins> : Build a Weather App wich provides the report for a city
+>- Use a third-party service
+>- Return JSON
+
+### Status Code
+
+|Code Range|Desccription|
+|:--:|:--:|
+|100-199|Information|
+|200-29|Successful|
+|300-399|Redirection|
+|400-499|Client error|
+|500-599|Server Error|
+
+
 
 ## Lexicon
 
