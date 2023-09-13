@@ -1554,7 +1554,7 @@ file StudentRestExceptionHandler.java
 @ControllerAdvice
 public class StudentRestExceptionHandler {
 
-  // paste the here from the controller
+  // paste the code here from the controller
 }
 ```
 
