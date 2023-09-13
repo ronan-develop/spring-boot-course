@@ -1549,7 +1549,7 @@ We want to return error as JSON.
 1. Create a new `@ControllerAdvice`
    
 ```java
-file StudentRestExceptionHandker.java
+file StudentRestExceptionHandler.java
 
 @ControllerAdvice
 public class StudentRestExceptionHandler {
