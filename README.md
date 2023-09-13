@@ -32,6 +32,7 @@
 
 - [REST Api](#rest-api)
     - [Status Code](#status-code)
+    - [MIME CONTENT TYPE](#mime-content-type)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1208,7 +1209,62 @@ spring.jpa.hibernate.ddl-auto=create
 |400-499|Client error|
 |500-599|Server Error|
 
+### Mime Content Type
 
+Message format is described by `MIME content type`.
+- Multipurpose INternet Mail-Extension
+- Basic Syntax : `type/sub-type` eg : `text/html`, `text/plain` ...
+- Rest service with Json : `aplication/json`
+
+### Hello world
+
+[Initializr](#https://start.spring.io/)
+
+Eg : `Maven`  Dependency :
+
+```xml
+<!-- Add Spring Boot Starter Web -->
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-stater-web</artifactId>
+</dependecy>
+```
+
+Packages you need : Web, 
+
+Create a `rest` package under the `group/artifactId` and inside you can write a new class.
+
+```java
+...
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api")
+public class DemoRestController {
+
+  @GetMapping("/hello")
+  public String sayHello() {
+
+    return "Hello World!";
+  }
+}
+```
+
+The controller needs the `@RestController` & `RequestMapping` annotation. 
+
+```java
+@RestController
+@RequestMapping("/api")
+public class DemoREstController {
+
+  @GetMapping("/hello")  ←  Access the Endpoint at `/api/hello`
+  public String sayHello() {
+
+    return "Hello World"; ←  return content
+  }
+}
+```
 
 ## Lexicon
 
