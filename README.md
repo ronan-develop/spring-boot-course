@@ -1561,20 +1561,20 @@ public class StudentRestExceptionHandler {
 
 ```java
  @RestController
-    @RequestMapping("/api")
-    public class StudentRestController {
+  @RequestMapping("/api")
+  public class StudentRestController {
 
-      @GetMapping("students/{studentId}")
-      public Student getStudent(@PathVariable in studentId) {
+    @GetMapping("students/{studentId}")
+    public Student getStudent(@PathVariable in studentId) {
 
-        if ( (studentId >= theStudents.size()) || (studentId < 0) ) {
-    
-          throw new StudentNotFoundException("Student id not found - " + studentId);
-        }
-
-        return theStudents.get(studentId);
+      if ( (studentId >= theStudents.size()) || (studentId < 0) ) {
+  
+        throw new StudentNotFoundException("Student id not found - " + studentId);
       }
+
+      return theStudents.get(studentId);
     }
+  }
 ```
 
 3. Add exception handling code to `@ControllerAdvice`
