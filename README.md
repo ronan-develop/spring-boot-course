@@ -34,6 +34,8 @@
     - [Status Code](#status-code)
     - [MIME CONTENT TYPE](#mime-content-type)
     - [Hello World](#hello-world)
+    - [Data Binding](#data-binding)
+    - [Spring Controller Advice](#spring-controller-advice)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -494,7 +496,7 @@ issue until too late and verify you have enough memory for all beans once create
 
 ### Bean Scope
 
-⚠ The default scope in spring is **`Singleton`**.
+**⚠️** The default scope in spring is **`Singleton`**.
 <ins>All the dependency injections for the bean, will reference the same bean !</ins>
 
 <ins>Example :</ins>
@@ -517,7 +519,7 @@ public class DemoController {
 ...
 }
 ```
-⚠ <ins>Both point the same instance</ins> ⚠
+**⚠️** <ins>Both point the same instance</ins> ⚠
 
 Additional Spring Bean scopes :
 
@@ -1196,8 +1198,7 @@ spring.jpa.hibernate.ddl-auto=create
 
 ## Rest Api
 
-><ins>**🛈Business**</ins> : Build a Weather App wich provides the report for a city
->- Use a third-party service
+><ins>**🛈Business**</ins> : Build a Rest Service for Students
 >- Return JSON
 
 ### Status Code
@@ -1257,12 +1258,343 @@ The controller needs the `@RestController` & `RequestMapping` annotation.
 ```java
 @RestController
 @RequestMapping("/api")
-public class DemoREstController {
+public class DemoRestController {
 
-  @GetMapping("/hello")  ←  Access the Endpoint at `/api/hello`
+  @GetMapping("/hello")  📝  Access the Endpoint at `/api/hello`
   public String sayHello() {
 
     return "Hello World"; ←  return content
+  }
+}
+```
+
+### Data Binding & Jackson Data Binding
+
+🛈 This the process of converting **Json** data **to** java **POJO**.
+
+By default, `Jackson` will call appropriate getter / setter method.
+
+```json
+{
+  "id": 14,
+  "firstname": "Mario",
+  "lastName": "Bros",
+  "active": true
+}
+```
+
+```java
+public class Hero {
+
+  private int id;
+  private string firstName;
+  private string lastName;
+  private boolean active;
+
+  public void SetFirstName(String firstName) {
+
+    this.firstName = firstName;
+  }
+
+  public String getFirstName() {
+
+    return firstName;
+  }
+...
+}
+```
+
+**⚠️** Jackson calls the getXXX or setXX methods (it does NOT access internal private fields directly).
+
+Our REST service will return `List<Student>` and we need to convert it to `JSON`. Jackson will help us with
+this !
+
+Java data being passed to REST controller is converted to Java POJO, Java POJO being returned from REST
+controller is converted to JSON. No need to serialize manually !
+
+```txt
+----------------------------
+-          Student         -
+----------------------------
+-   firstName   : String   -
+-   lastName    :   String -
+----------------------------
+- getFirstName() :  String -
+- setFirstName(...) : void -
+- getLastName() :   String -
+- setLastName(...) :  void -
+----------------------------
+```
+
+1. Create JAVA POJO for **Student**
+
+```java
+public class Student {
+
+  private String firstaName;
+  private String lastName;
+
+  public Student() {
+  }
+
+  public Student(String firstName, String lastName) {
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  public String getFirstName() {
+
+    return firstName;
+  }
+
+  public setFirstName(String firstName) {
+
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+
+    return lastName;
+  }
+
+  public setLastName(String lastName) {
+
+    this.lastName = lastName;
+  }
+}
+```
+
+2. Create Spring REST Service using `@RestController`
+
+```java
+@RestController
+@RequestMapping("/api")
+public class StudentRestController {
+
+  @GetMapping("/students")
+  public List<Student> getStudents() {
+
+...  connect to 🛢️ and request for StudentList
+
+    return theStudents; 📌 Jackson will convert List<Student> to JSON array
+  }
+}
+```
+
+3. Path Variables
+
+Retrive single student by ID : `/api/students/{studentId}`
+
+```java
+@RestController
+@RequestMapping("/api")
+public class StudentRestController {
+
+  @GetMapping("/students/{studentId}")
+  public Student getStudent(@PathVariable in studentId) {
+...
+    theStudents.get(studentId);
+  }
+}
+```
+
+4. Handling Exception
+
+We want to return error as JSON.
+
+```json
+{
+  "status": 404,
+  "message": "Student is not found",
+  "timeStamp": 15261496
+}
+```
+  - Create a cutom error response class
+    ```java
+    file StudentErrorResponse
+
+    public class StudentErrorResponse {
+
+      private int status;
+      private String message;
+      private long timeStamp;
+    
+      public int getStatus() {
+
+        return status;
+      }
+
+      public void setStatus(int status) {
+
+        this.status = status;
+      }
+
+      public String getMessage() {
+
+        return message;
+      }
+
+      public void setMessage(String message) {
+
+        this.message = message;
+      }
+
+      public long timeStamp() {
+
+        return timeStamp;
+      }
+
+      public void setTimeStamp(long timeStamp) {
+
+        this.timeStamp = timeStamp;
+      }
+    }
+    ```
+    
+  - Create a custom exception class
+    ```java
+        file StudentNotFoundException
+    
+        public class StudentNotFoundException extends RuntimeException {
+    
+          public StudentNotFoundException(String message) {
+
+            super(message);
+          }
+
+          public StudentNotFoundException(String message, Throwable cause) {
+
+            super(message, cause);
+          }
+
+          public StudentNotFoundException(Throwable cause) {
+
+            super(cause);
+          }
+    }
+    ```
+  - update REST service to throw exception if student not found
+
+    ```java
+    @RestController
+    @RequestMapping("/api")
+    public class StudentRestController {
+
+      @GetMapping("students/{studentId}")
+      public Student getStudent(@PathVariable in studentId) {
+
+        if ( (studentId >= theStudents.size()) || (studentId < 0) ) {
+    
+          throw new StudentNotFoundException("Student id not found - " + studentId);
+        }
+
+        return theStudents.get(studentId);
+      }
+    }
+    ```
+    
+  - Add an Exception handler method using `@ExceptionHandler`
+ 
+  ```java
+  @RestController
+    @RequestMapping("/api")
+    public class StudentRestController {
+
+      @GetMapping("students/{studentId}")
+      public Student getStudent(@PathVariable in studentId) {
+
+        if ( (studentId >= theStudents.size()) || (studentId < 0) ) {
+    
+          throw new StudentNotFoundException("Student id not found - " + studentId);
+        }
+
+        return theStudents.get(studentId);
+      }
+
+      @ExceptionHandler
+      public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e) {
+
+        StudentErrorResponse e = new StudentErrorResponse();
+        error.setStatus(HttpStatus.NOT_FOUND.value());
+        error.setMessage(e.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+      }
+
+      @ExceptionHandler
+      public ResponseEntity<StudentErrorResponse> handleException(Exception e) {
+
+        StudentErrorResponse e = new StudentErrorResponse();
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessage(e.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+      }
+    }
+  ```
+`@ExceptionHandler` annotation specifies it's an exdception handler method, the type of the response body is
+`StudentErrorResponse` finally handler catches `StudentNotFoundException` excpetion.
+
+### Spring Controller Advice
+
+- It's similar to an interceptor / filter
+- Pre-process requests to controller
+- Post-process response to handle exceptions
+- Perfect for Global exception handling
+- Real-time use of AOP
+
+1. Create a new `@ControllerAdvice`
+   
+```java
+file StudentRestExceptionHandker.java
+
+@ControllerAdvice
+public class StudentRestExceptionHandler {
+
+}
+```
+
+2. Refactor and remove handling code
+
+```java
+ @RestController
+    @RequestMapping("/api")
+    public class StudentRestController {
+
+      @GetMapping("students/{studentId}")
+      public Student getStudent(@PathVariable in studentId) {
+
+        if ( (studentId >= theStudents.size()) || (studentId < 0) ) {
+    
+          throw new StudentNotFoundException("Student id not found - " + studentId);
+        }
+
+        return theStudents.get(studentId);
+      }
+    }
+```
+
+3. Add exception handling code to `@ControllerAdvice`
+
+```java
+file StudentRestExceptionHandler.java
+
+@ControllerAdvice
+public class StudentRestExceptionHandler {
+
+  @ExceptionHandler
+  public ResponseEntity<StudentErrorResponse> handleException(Exception e) {
+
+    StudentErrorResponse e = new StudentErrorResponse();
+
+    error.setStatus(HttpStatus.BAD_REQUEST.value());
+    error.setMessage(e.getMessage());
+    error.setTimeStamp(System.currentTimeMillis());
+
+    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
   }
 }
 ```
