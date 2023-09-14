@@ -1632,6 +1632,7 @@ public class StudentRestExceptionHandler {
               📁 error
               📁 repository
               📁 service
+                📋 EmployeeDAO.java
             📋 EmployeeManagerApplication.java
       📂 resources
         📁 static
@@ -1726,13 +1727,22 @@ One `Layer` is needed for `CRUD` operations even if standard Api is used. It's a
 // file service/EmployeeDAO.java
 package com.api.employee-manager.service;
 
+import java.util.List;
 
+public interface EmployeeDAO {
+ 
+  List<Employee> findAll();
+}
 ```
 
 ```java
 // file service/EmployeeDAOImpl.java
 package com.api.employee-manager.service;
 
+import com.api.employee-manager.entity.Employee;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 
   private EntityManager em;
@@ -1741,6 +1751,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
   public EmployeeDAOImpl(EntityManager theEntityManager) {
 
     em = theEntityManager;
+  }
+
+  @Override
+  public List<Employee> findAll() {
+
+    TyepdQuery<Empoloyee> theQuery = em.createQuery("from Employee, Employee.class);
+
+    return theQuery.getResultList();
   }
 }
 ```
