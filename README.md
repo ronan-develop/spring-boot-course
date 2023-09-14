@@ -36,7 +36,8 @@
     - [Hello World](#hello-world)
     - [Data Binding](#data-binding)
     - [Spring Controller Advice](#spring-controller-advice)
-    - [REST Project Example](rest-project-example)
+
+- [REST Demo](rest-demo)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1612,8 +1613,7 @@ public class StudentRestExceptionHandler {
 }
 ```
 
-### Rest Project Example
-
+## Rest Demo
 
 
 ## Lexicon
