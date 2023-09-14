@@ -1628,13 +1628,15 @@ public class StudentRestExceptionHandler {
             📂 employee-manager
               📁 controller
                 📋 EmployeeController.java
+              📁 dao
+                📋 EmployeeDAO.java
+                📋 EmployeeDAOImpl.java
               📁 entity
                 📋 Employee.java
               📁 error
               📁 repository
               📁 service
-                📋 EmployeeDAO.java
-                📋 EmployeeDAOImpl.java
+                📋 EmployeeServiceImpl.java
             📋 EmployeeManagerApplication.java
       📂 resources
         📁 static
@@ -1726,7 +1728,7 @@ One `Layer` is needed for `CRUD` operations even if standard Api is used. It's a
 <ins>Create an `interface`</ins> : the main purpose is to respect the **I** in the `SOLID` pattern.
 
 ```java
-// file service/EmployeeDAO.java
+// file dao/EmployeeDAO.java
 package com.api.employee-manager.service;
 
 import java.util.List;
@@ -1738,8 +1740,8 @@ public interface EmployeeDAO {
 ```
 
 ```java
-// file service/EmployeeDAOImpl.java
-package com.api.employee-manager.service;
+// file dao/EmployeeDAOImpl.java
+package com.api.employee-manager.dao;
 
 import com.api.employee-manager.entity.Employee;
 import org.springframework.stereotype.Repository;
@@ -1770,24 +1772,72 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 package com.api.employee-manager.controller;
 
 import com.api.employee-manager.entity.Employee;
-import org.springframework.stereotype.Repository;
+import com.api.employee-manager.service.EmployeeService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
 
-  private employeeDAO;
+  private EmployeeService employeeService;
 
   @Autowired
-  public EmployeeController(EmployeeDAO theEmployeeDAO) {
+  public EmployeeController(EmployeeService thEmployeeService) {
 
-    employeeDAO = theEmployeeDAO;
+    employeeService = thEmployeeService;
   }
 
   @GetMapping("/employees")
   public List<Employee> findAll() {
 
-    return theEmployeeDAO.findAll();
+    return theEmployeeService.findAll();
+  }
+}
+```
+
+```java
+// file service/EmployeeService.java
+EmployeeServiceImpl
+
+import java.util.List;
+import com.api.employee-manager.entity.Employee;
+
+public interface EmployeeService {
+ 
+  List<Employee> findAll();
+}
+```
+
+```java
+// file service/EmployeeServiceImpl.java
+
+package com.api.employee-manager.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import com.api.employee-manager.entity.Employee;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+  private EmployeeDAO employeeDAO;
+
+  @Autowired
+  public EmployeeServiceImpl(EmployeeDAO theEmployeeDAO) {
+
+    employeeDAO = theEmployeeDAO;
+  }
+
+  @Override
+  public List<Employee> findAll() {
+
+    employeeDAO.findAll();    
   }
 }
 ```
