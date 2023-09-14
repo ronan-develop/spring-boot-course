@@ -1679,13 +1679,42 @@ Application properties :
 #
 # JDBC properties
 #
-spring.datasource.url=jdbc:mysql//localhost:3306/employee_directory
+spring.datasource.url=jdbc:mysql//localhost:3306/employee
 spring.datasource.username=root
 spring.datasource.password=root
 ```
 
 ### Employee Entity
 
+```java
+package com.api.employee-manager.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name="emlpoyee")
+public class Employee {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name="id")
+  private int id;
+
+  @Column(name="first_name")
+  private String firstName;
+
+  @Column(name="last_name")
+  private String lastName;
+
+  @Column(name="email")
+  private String email;
+}
+```
 
 ### Build The DAO
 
