@@ -1617,6 +1617,8 @@ public class StudentRestExceptionHandler {
 
 ### Spring Initializr
 
+ℹ Examples :
+
 >Select : Maven, Java, LTS version, group & artifactId
 >
 >Dependencies :
