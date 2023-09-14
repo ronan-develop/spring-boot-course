@@ -38,6 +38,7 @@
     - [Spring Controller Advice](#spring-controller-advice)
 
 - [REST Demo](#rest-demo)
+    - [Employee Entity](#employee-entity)
     - [Build The DAO](#build-the-dao)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
@@ -1683,7 +1684,7 @@ spring.datasource.username=root
 spring.datasource.password=root
 ```
 
-
+### Employee Entity
 
 
 ### Build The DAO
