@@ -37,7 +37,7 @@
     - [Data Binding](#data-binding)
     - [Spring Controller Advice](#spring-controller-advice)
 
-- [REST Demo](rest-demo)
+- [REST Demo](#rest-demo)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
