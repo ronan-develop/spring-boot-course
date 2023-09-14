@@ -1612,7 +1612,7 @@ public class StudentRestExceptionHandler {
 }
 ```
 
-### Rest project example
+### Rest Project Example
 
 
 
