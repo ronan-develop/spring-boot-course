@@ -1615,6 +1615,26 @@ public class StudentRestExceptionHandler {
 
 ## Rest Demo
 
+### Spring Initializr
+
+>Select : Maven, Java, LTS version, group & artifactId
+>
+>Dependencies :
+>
+>Spring Web
+>
+>JPA
+>
+>DevTools
+>
+>Mysql driver
+>
+>HATEOAS
+>
+>Docker Compose
+>
+>Lombok
+
 
 ## Lexicon
 
