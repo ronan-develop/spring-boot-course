@@ -38,7 +38,7 @@
     - [Spring Controller Advice](#spring-controller-advice)
 
 - [REST Demo](#rest-demo)
-    -[Build The DAO](#build-the-dao)
+    - [Build The DAO](#build-the-dao)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
