@@ -38,6 +38,7 @@
     - [Spring Controller Advice](#spring-controller-advice)
 
 - [REST Demo](#rest-demo)
+  -[Build The DAO](#build-the-dao)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1615,6 +1616,40 @@ public class StudentRestExceptionHandler {
 
 ## Rest Demo
 
+```txt
+📁 employee-manager
+  📋 pom.xml
+  📂 src
+    📂 main
+      📂 java
+        📂 com
+          📂 api
+            📂 employee-manager
+              📁 controller
+              📁 entity
+                📋 Employee.java
+              📁 error
+              📁 repository
+              📁 service
+            📋 EmployeeManagerApplication.java
+      📂 resources
+        📁 static
+        📁 templates
+      📁 webapp
+    📂 test
+      📂 java
+        📂 group
+          📂 artifactId
+            📂 appName
+              📁 controller
+              📁 error
+              📁 repository
+              📁 service
+            📋 EmployeeManagerApplicationTest.java
+      📁 resources
+  📁 target
+```
+
 ### Spring Initializr
 
 ℹ Examples :
@@ -1637,7 +1672,48 @@ public class StudentRestExceptionHandler {
 >
 >Lombok
 
+Application properties :
 
+```application.poperties
+#
+# JDBC properties
+#
+spring.datasource.url=jdbc:mysql//localhost:3306/employee_directory
+spring.datasource.username=root
+spring.datasource.password=root
+```
+
+
+
+
+### Build The DAO
+
+One `Layer` is needed for `CRUD` operations even if standard Api is used. It's a good pratice.
+
+<ins>Create an `interface`</ins> : the main purpose is to respect the **I** in the `SOLID` pattern.
+
+```java
+// file service/EmployeeDAO.java
+package com.api.employee-manager.service;
+
+
+```
+
+```java
+// file service/EmployeeDAOImpl.java
+package com.api.employee-manager.service;
+
+public class EmployeeDAOImpl implements EmployeeDAO {
+
+  private EntityManager em;
+
+  @Autowired
+  public EmployeeDAOImpl(EntityManager theEntityManager) {
+
+    em = theEntityManager;
+  }
+}
+```
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
