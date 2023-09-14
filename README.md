@@ -36,7 +36,7 @@
     - [Hello World](#hello-world)
     - [Data Binding](#data-binding)
     - [Spring Controller Advice](#spring-controller-advice)
-    - [REST Api Design]({rest-api-design)
+    - [REST Api Design](rest-project-example)
 
 - [Turn OFF banner and chatter](#turn-off-banner-chatter)
 
@@ -1612,10 +1612,7 @@ public class StudentRestExceptionHandler {
 }
 ```
 
-### REST Api Design
-
->Don't include actions in the endpoint `/api/deleteEmployee`
->Use HTTP method to assign actions
+### REST project example
 
   
 
