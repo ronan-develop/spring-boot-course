@@ -1627,6 +1627,7 @@ public class StudentRestExceptionHandler {
           📂 api
             📂 employee-manager
               📁 controller
+                📋 EmployeeController.java
               📁 entity
                 📋 Employee.java
               📁 error
@@ -1759,6 +1760,33 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     TyepdQuery<Empoloyee> theQuery = em.createQuery("from Employee, Employee.class);
 
     return theQuery.getResultList();
+  }
+}
+```
+
+```java
+// file controller/EmployeeController.java
+package com.api.employee-manager.controller;
+
+import com.api.employee-manager.entity.Employee;
+import org.springframework.stereotype.Repository;
+
+@RestController
+@RequestMapping("/api")
+public class EmployeeController {
+
+  private employeeDAO;
+
+  @Autowired
+  public EmployeeController(EmployeeDAO theEmployeeDAO) {
+
+    employeeDAO = theEmployeeDAO;
+  }
+
+  @GetMapping("/employees")
+  public List<Employee> findAll() {
+
+    return theEmployeeDAO.findAll();
   }
 }
 ```
