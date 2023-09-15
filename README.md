@@ -1812,6 +1812,14 @@ public interface EmployeeService {
 }
 ```
 
+Service Layer - Best pratice
+
+Best pratice is to apply transactional boudaries at the service layer.
+>It's the service layer responsability to manage transaction boudaries
+
+- Aply `@Transactional` on service methods
+- Remove `@Transactional` on `DAO` methods if they already exist
+  
 ```java
 // file service/EmployeeServiceImpl.java
 
@@ -1841,6 +1849,8 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 }
 ```
+
+
 ## Lexicon
 
 - HATEOAS :  Hypermedia as the Engine of Application State
